@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Zap, Flame, Droplets, DollarSign, Calculator } from 'lucide-react';
-import type { UtilityUsage } from '../../types';
-import { estimateUsageFromCost } from '../../utils/calculations';
+import type { UtilityUsage } from '../lib/types';
+import { estimateUsageFromCost } from '../lib/calculations';
 
 interface UsageInputFormProps {
   onSubmit: (usage: UtilityUsage) => void;
@@ -35,14 +35,13 @@ export const UsageInputForm: React.FC<UsageInputFormProps> = ({
   state
 }) => {
   const [formData, setFormData] = useState<FormData>({
-    electricity: { usage: '', cost: '', useEstimate: false },
-    naturalGas: { usage: '', cost: '', unit: 'therms', useEstimate: false },
-    water: { usage: '', cost: '', unit: 'gallons', useEstimate: false }
+    electricity: { usage: '10', cost: '100', useEstimate: true },
+    naturalGas: { usage: '10', cost: '100', unit: 'therms', useEstimate: true },
+    water: { usage: '10', cost: '100', unit: 'gallons', useEstimate: true }
   });
 
-  const [estimatedUsage, setEstimatedUsage] = useState<Partial<Record<keyof FormData, number>>>({});
-
-  useEffect(() => {
+  // Use useMemo to prevent unnecessary re-renders and focus loss
+  const estimatedUsage = useMemo(() => {
     const newEstimatedUsage: Partial<Record<keyof FormData, number>> = {};
 
     if (formData.electricity.useEstimate && formData.electricity.cost) {
@@ -66,8 +65,10 @@ export const UsageInputForm: React.FC<UsageInputFormProps> = ({
       }
     }
 
-    setEstimatedUsage(newEstimatedUsage);
-  }, [formData, state]);
+    return newEstimatedUsage;
+  }, [formData.electricity.useEstimate, formData.electricity.cost,
+      formData.naturalGas.useEstimate, formData.naturalGas.cost,
+      formData.water.useEstimate, formData.water.cost, state]);
 
   const updateFormData = (utility: keyof FormData, field: string, value: string | boolean) => {
     setFormData(prev => ({
@@ -117,7 +118,7 @@ export const UsageInputForm: React.FC<UsageInputFormProps> = ({
     );
   };
 
-  const UtilitySection = ({
+  const UtilitySection = React.memo(({
     title,
     icon: Icon,
     color,
@@ -219,7 +220,7 @@ export const UsageInputForm: React.FC<UsageInputFormProps> = ({
         )}
       </div>
     </div>
-  );
+  ));
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">

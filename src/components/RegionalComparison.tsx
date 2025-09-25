@@ -1,8 +1,8 @@
 import React from 'react';
 import { TrendingUp, TrendingDown, Minus, Users, MapPin } from 'lucide-react';
-import type { EmissionResults, LocationData } from '../../types';
-import { getRegionalAverage } from '../../utils/emissionFactors';
-import { calculateEmissions } from '../../utils/calculations';
+import type { EmissionResults, LocationData } from '../lib/types';
+import { getRegionalAverage } from '../lib/emissionFactors';
+import { calculateEmissions } from '../lib/calculations';
 
 interface RegionalComparisonProps {
   emissions: EmissionResults;

@@ -1,6 +1,6 @@
 import React from 'react';
-import type { UtilityUsage, EmissionResults, LocationData } from '../../types';
-import { calculateEmissions, formatEmissions } from '../../utils/calculations';
+import type { UtilityUsage, EmissionResults, LocationData } from '../lib/types';
+import { calculateEmissions, formatEmissions } from '../lib/calculations';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
 interface EmissionsEngineProps {
@@ -18,13 +18,13 @@ export const EmissionsEngine: React.FC<EmissionsEngineProps> = ({
 }) => {
   React.useEffect(() => {
     const emissions = calculateEmissions(usage, location);
-    
+
     if (previousMonthEmissions) {
       const percentChange = ((emissions.total - previousMonthEmissions) / previousMonthEmissions) * 100;
       emissions.previousMonth = previousMonthEmissions;
       emissions.percentChange = Math.round(percentChange * 100) / 100;
     }
-    
+
     onEmissionsCalculated(emissions);
   }, [usage, location, previousMonthEmissions, onEmissionsCalculated]);
 

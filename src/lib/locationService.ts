@@ -1,5 +1,5 @@
-import type { LocationData } from '../types';
-import { getEmissionFactor } from '../utils/emissionFactors';
+import type { LocationData } from './types';
+import { getEmissionFactor } from './emissionFactors';
 
 const ZIP_CODE_TO_STATE: Record<string, string> = {
   '90': 'CA', '91': 'CA', '92': 'CA', '93': 'CA', '94': 'CA', '95': 'CA', '96': 'CA',

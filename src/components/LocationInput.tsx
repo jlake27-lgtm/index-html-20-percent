@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, AlertCircle } from 'lucide-react';
-import { isValidZipCode } from '../services/locationService';
+import { isValidZipCode } from '../lib/locationService';
 
 interface LocationInputProps {
   onLocationSubmit: (zipCode: string) => void;

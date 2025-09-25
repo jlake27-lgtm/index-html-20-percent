@@ -1,7 +1,7 @@
 import React from 'react';
 import { Lightbulb, Flame, Droplets, DollarSign, Leaf, ChevronRight } from 'lucide-react';
-import type { UtilityUsage, EmissionResults, Recommendation } from '../../types';
-import { calculateCostSavings } from '../../utils/calculations';
+import type { UtilityUsage, EmissionResults, Recommendation } from '../lib/types';
+import { calculateCostSavings } from '../lib/calculations';
 
 interface RecommendationEngineProps {
   usage: UtilityUsage;

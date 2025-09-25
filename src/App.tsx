@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { AppProvider, useApp } from './contexts/AppContext';
 import { LocationInput } from './components/LocationInput';
-import { UsageInputForm } from './modules/input/UsageInputForm';
-import { EmissionsEngine, EmissionsSummary } from './modules/calculations/EmissionsEngine';
-import { EmissionsPieChart, EmissionsBarChart, MonthlyTrendChart } from './modules/visualization/EmissionsChart';
-import { RegionalComparison } from './modules/comparison/RegionalComparison';
-import { RecommendationEngine, RecommendationsDisplay } from './modules/recommendations/RecommendationEngine';
-import { getLocationData } from './services/locationService';
+import { UsageInputForm } from './components/UsageInputForm';
+import { EmissionsEngine, EmissionsSummary } from './components/EmissionsEngine';
+import { EmissionsPieChart, EmissionsBarChart, MonthlyTrendChart } from './components/EmissionsChart';
+import { RegionalComparison } from './components/RegionalComparison';
+import { RecommendationEngine, RecommendationsDisplay } from './components/RecommendationEngine';
+import { getLocationData } from './lib/locationService';
 import { Leaf, RotateCcw, Plus } from 'lucide-react';
 
 const AppStep = {
